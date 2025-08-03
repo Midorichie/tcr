@@ -1,3 +1,5 @@
+;; Token Curated Registry (TCR) Smart Contract
+
 (define-constant ERR_UNAUTHORIZED (err u100))
 (define-constant ERR_ALREADY_LISTED (err u101))
 (define-constant ERR_NOT_LISTED (err u102))
@@ -21,8 +23,10 @@
               (begin
                 (try! (stx-transfer? STAKE_AMOUNT caller (as-contract tx-sender)))
                 (map-set registry entry true)
-                (map-set stakes caller STAKE_AMOUNT)
-                (ok true)
+                (if (is-none (map-get? stakes caller))
+                    (ok (map-set stakes caller STAKE_AMOUNT))
+                    (ok true)
+                )
               )
           )
         )
@@ -34,8 +38,20 @@
   (begin
     (if (is-none (map-get? registry entry))
         ERR_NOT_LISTED
-        ;; Placeholder for dispute resolution or voting
+        ;; Future logic for voting or dispute resolution
         (ok true)
+    )
+  )
+)
+
+(define-public (remove-entry (entry principal))
+  (begin
+    (if (is-none (map-get? registry entry))
+        ERR_NOT_LISTED
+        (begin
+          (map-delete registry entry)
+          (ok true)
+        )
     )
   )
 )
