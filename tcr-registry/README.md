@@ -1,68 +1,98 @@
-# Token Curated Registry (TCR) – Clarity Smart Contract
+# 🧠 Token Curated Registry (TCR) – Clarity Smart Contract
 
-This project implements a simple Token Curated Registry on the Stacks Blockchain using the Clarity smart contract language.
+This project implements a simple **Token Curated Registry (TCR)** on the Stacks Blockchain using the Clarity smart contract language. It allows users to stake tokens to add entries to a curated list and challenge them.
+
+---
 
 ## 📁 Project Structure
 
 tcr-registry/
 │
 ├── contracts/
-│ └── tcr.clar # Main smart contract file
-├── tests/ # Clarinet test files (to be added)
-├── Clarinet.toml # Clarinet project configuration
+│ ├── tcr.clar # Main TCR contract
+│ └── voting.clar # New voting/dispute system (Phase 2)
+│
+├── ui/
+│ └── index.html # Placeholder frontend
+│
+├── tests/ # Clarinet test files (optional)
+├── Clarinet.toml # Project configuration
 └── README.md # Documentation
 
-markdown
+yaml
 Copy
 Edit
 
-## 🧰 Requirements
+---
 
-- [Clarinet](https://docs.stacks.co/clarity/clarinet-cli/install)
-- Node.js (for tests)
+## ⚙️ Requirements
+
+- [Clarinet CLI](https://docs.stacks.co/clarity/clarinet-cli/install)
+- Node.js (for future UI or testing)
+- Git (for version control)
+
+---
 
 ## 🚀 Setup Instructions
 
-1. Clone or create your project folder:
+1. **Clone the Project**
    ```bash
    git clone <your-repo-url>
    cd tcr-registry
-Install Clarinet (if not installed):
+Install Clarinet
 
 bash
 Copy
 Edit
 curl -sSfL https://get.tryclarinet.com | sh
-Build the project:
+Check Contracts
 
 bash
 Copy
 Edit
 clarinet check
-Run tests (after creating them):
+(Optional) Run Tests
 
 bash
 Copy
 Edit
 clarinet test
-⚙️ Smart Contract Usage
-add-entry (entry principal)
-Stakes STX to register a new entry.
+🔐 Smart Contract Overview
+✅ add-entry (entry principal)
+Stakes 1 STX to add a new registry entry.
 
-Fails if already listed or insufficient balance.
+Rejects if already listed or balance is too low.
 
-challenge-entry (entry principal)
-Placeholder for challenge logic (voting/dispute system).
+🧪 challenge-entry (entry principal)
+Currently a stub. Placeholder for dispute voting.
 
-is-listed (entry principal)
-Returns true/false if entry exists in the registry.
+🗑️ remove-entry (entry principal)
+Removes entry from registry.
 
-get-stake (user principal)
-Reads stake amount of a user.
+No stake refund logic yet (planned).
 
-�� Next Steps
-Add test coverage
+🔎 is-listed (entry principal)
+Checks if an entry exists in the registry.
 
-Implement voting mechanism
+💰 get-stake (user principal)
+Returns amount staked by a user.
 
-Handle challenge resolution and stake slashing
+🧩 Phase 2 Features
+🐛 Bug fix: Prevents overwriting existing stake on repeat add-entry
+
+🗑️ New Function: remove-entry allows deletion of registry entries
+
+📄 New UI Page: Basic index.html added for interaction simulation
+
+📜 New Contract: voting.clar contract for submitting votes on challenged entries
+
+📂 Clarinet.toml updated to register multiple contracts
+
+📦 Next Steps
+Implement full voting and challenge resolution
+
+Add slashing/rewarding based on voting outcome
+
+Integrate Stacks.js frontend
+
+Deploy to testnet

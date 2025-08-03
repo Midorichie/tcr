@@ -1,10 +1,13 @@
 [project]
 name = "tcr-registry"
 clarity_version = "2.1.0"
-description = "A Token Curated Registry (TCR) on Stacks Blockchain using Clarity"
+description = "Token Curated Registry (TCR) with Voting"
 
 [contracts.tcr]
 path = "contracts/tcr.clar"
+
+[contracts.voting]
+path = "contracts/voting.clar"
 
 [repl.analysis]
 passes = ["check_checker"]
